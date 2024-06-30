@@ -6,7 +6,18 @@ const Header = () => {
 
     const [isVisible, setIsVisible] = useState(false);
     const [isAnfitrion, setIsAnfitrion] = useState(false);
+    const [filter, setFilter] = useState('price')
+
+    const changeFilter = (e) => setFilter(e.target.value)
     const toggleMenu = () => setIsVisible(!isVisible)
+
+    const search = (e) => {
+        const query = e.target.value
+
+        /*
+        TODO: implement search engine
+        */
+    }
 
     useEffect(() => {
         fetch('http://localhost/api/profile/getUserPic').then((res) => {
@@ -34,12 +45,12 @@ const Header = () => {
             <h1 className="appName">JsBnB</h1>
             <div className="headerSearch">
                 <div className="headerSearchbar">
-                    <input type="text" placeholder='Search Anything' />
+                    <input type="text" placeholder='Search Anything' onChange={search} />
                     <button><FaMagnifyingGlass id='lupaIcon' /></button>
                 </div>
                 <div className="searchFilters">
-                    <select id="searchFilters">
-                        <option value="price">Price</option>
+                    <select id="searchFilters" onChange={changeFilter}>
+                        <option value="price" >Price</option>
                         <option value="reviews">Reviews</option>
                         <option value="city">City</option>
                         <option value="super">SuperAdmins</option>
@@ -48,9 +59,9 @@ const Header = () => {
             </div>
             <div className="headerProfile">
                 <div className="headerProfileImage" onClick={toggleMenu}>
-                    
+
                 </div>
-                
+
                 {isVisible && (
                     <div className="dropdown-content">
                         {/* Paso 2: Estructura del menú */}
@@ -59,7 +70,7 @@ const Header = () => {
                         <a href="#">Log out</a>
                     </div>
                 )}
-                
+
             </div>
         </div>
     )
