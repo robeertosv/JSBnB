@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Product Sans', sans-serif;
+    border: 0;
+    outline: 0;
+}
+
+:root {
+    --darkThemeBg: #282828;
+    --lightThemeBg: #eee;
+
+    --darkThemeColor: #eee;
+    --lightThemeColor: #282828;
+}
+
+.lightTheme {
+        color: var(--lightThemeColor);
+        background: var(--lightThemeBackground);
+    }
+
+    .darkTheme {
+        color: var(--darkThemeColor);
+        background: var(--darkThemeBg);
+    }

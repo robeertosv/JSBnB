@@ -1,0 +1,45 @@
+.headerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+
+    h1 { cursor: pointer; }
+
+    .headerSearch {
+        width: 100%;
+        margin: 0 40px;
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .headerSearchbar {
+            input {
+                font-size: 1.5rem;
+                padding: 10px;
+                border-radius: 20px;
+            }
+
+            button {
+                border-radius: 50%;
+                background: transparent;
+                position: relative;
+                right: 10%;
+                top: 4px;
+                cursor: pointer;
+                #lupaIcon {
+                    font-size: 1.5rem;
+                }
+            }
+        }
+        .searchFilters {
+            #searchFilters {
+                font-size: 1.5rem;
+                margin: 10px;
+                padding: 5px;
+                border-radius: 10px;
+            }
+        }
+    }
+}
