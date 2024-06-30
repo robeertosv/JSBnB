@@ -1,6 +1,7 @@
 import '../styles/header.scss'
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { useEffect, useState } from 'react';
+import query from '../../utils/query'
 
 const Header = () => {
 
@@ -12,7 +13,7 @@ const Header = () => {
     const toggleMenu = () => setIsVisible(!isVisible)
 
     const search = (e) => {
-        const query = e.target.value
+        const searchQuery = e.target.value
 
         /*
         TODO: implement search engine
@@ -21,22 +22,21 @@ const Header = () => {
 
     useEffect(() => {
         fetch('http://localhost/api/profile/getUserPic').then((res) => {
-            res.text().then((url) => {
+            res.blob().then((blob) => {
                 let profile = document.querySelector('.headerProfileImage')
                 profile.innerHTML = ''
+                const url = URL.createObjectURL(blob)
 
                 let profileImg = document.createElement('img')
                 profileImg.classList.add('headerProfileImg')
-                profileImg.src = url
+                profileImg.src = `${url}`
 
                 profile.appendChild(profileImg)
             })
         })
 
-        fetch('http://localhost/api/profile/getAccountType').then(res => {
-            res.text().then(type => {
-                type == 'anfitrion' ? setIsAnfitrion(true) : setIsAnfitrion(false)
-            })
+        query('http://localhost/api/profile/getAccountType', { uid: 1 }).then(res => {
+                res.type == 'anfitrion' ? setIsAnfitrion(true) : setIsAnfitrion(false)
         })
     }, [])
 

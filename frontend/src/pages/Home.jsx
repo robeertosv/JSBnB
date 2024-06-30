@@ -1,6 +1,6 @@
 import Header from '../components/Header'
 
-const App = () => {
+const Home = () => {
   return (
     <div className='container'>
         <Header/>
@@ -8,4 +8,4 @@ const App = () => {
   )
 }
 
-export default App
+export default Home
