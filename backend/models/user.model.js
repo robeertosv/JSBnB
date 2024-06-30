@@ -22,6 +22,11 @@ const schema = new mongoose.Schema({
     profilePic: {
         type: String,
         required: false
+    },
+    accountType: {
+        type: String,
+        required: true,
+        default: 'particular'
     }
 })
 

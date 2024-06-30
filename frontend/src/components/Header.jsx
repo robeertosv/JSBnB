@@ -1,20 +1,30 @@
 import '../styles/header.scss'
 import { FaMagnifyingGlass } from "react-icons/fa6";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const Header = () => {
+
+    const [isVisible, setIsVisible] = useState(false);
+    const [isAnfitrion, setIsAnfitrion] = useState(false);
+    const toggleMenu = () => setIsVisible(!isVisible)
 
     useEffect(() => {
         fetch('http://localhost/api/profile/getUserPic').then((res) => {
             res.text().then((url) => {
-                let profile = document.querySelector('.headerProfile')
+                let profile = document.querySelector('.headerProfileImage')
                 profile.innerHTML = ''
-                
+
                 let profileImg = document.createElement('img')
                 profileImg.classList.add('headerProfileImg')
                 profileImg.src = url
 
                 profile.appendChild(profileImg)
+            })
+        })
+
+        fetch('http://localhost/api/profile/getAccountType').then(res => {
+            res.text().then(type => {
+                type == 'anfitrion' ? setIsAnfitrion(true) : setIsAnfitrion(false)
             })
         })
     }, [])
@@ -37,7 +47,19 @@ const Header = () => {
                 </div>
             </div>
             <div className="headerProfile">
-                Loading...
+                <div className="headerProfileImage" onClick={toggleMenu}>
+                    
+                </div>
+                
+                {isVisible && (
+                    <div className="dropdown-content">
+                        {/* Paso 2: Estructura del menú */}
+                        <a href="#">{isAnfitrion ? 'Mis reservas' : 'Mis inmuebles'}</a>
+                        <a href="#">Settings</a>
+                        <a href="#">Log out</a>
+                    </div>
+                )}
+                
             </div>
         </div>
     )
