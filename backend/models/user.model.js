@@ -17,7 +17,8 @@ const schema = new mongoose.Schema({
     },
     phone: {
         type: Number,
-        required: true
+        required: true,
+        unique: true
     },
     profilePic: {
         type: String,

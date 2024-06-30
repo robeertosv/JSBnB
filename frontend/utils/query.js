@@ -2,7 +2,7 @@ const query = async (url, data) => {
     let headers = new Headers()
     headers.append('Content-Type', 'application/json')
 
-    const body = JSON.stringify({ data })
+    const body = JSON.stringify(data)
 
     const options = {
         headers,

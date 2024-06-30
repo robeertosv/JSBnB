@@ -21,23 +21,38 @@ const Header = () => {
     }
 
     useEffect(() => {
-        fetch('http://localhost/api/profile/getUserPic').then((res) => {
-            res.blob().then((blob) => {
-                let profile = document.querySelector('.headerProfileImage')
-                profile.innerHTML = ''
-                const url = URL.createObjectURL(blob)
+        //query('http://localhost/api/auth/login', { username: 'robeertosv', fullname: 'Roberto Seco', password: 'lopedevega33', confirmPassword: 'lopedevega33', phone: 640721423, profilePic: 'roberto.jpg', accountType: 'particular' })
+        fetch('http://localhost/api/auth/validateAuth', {method: 'POST', redirect: 'follow'}).then((res) => {
+            res.json().then(data => {
+                data.user.accountType == 'anfitrion' ? setIsAnfitrion(true) : setIsAnfitrion(false)
 
-                let profileImg = document.createElement('img')
-                profileImg.classList.add('headerProfileImg')
-                profileImg.src = `${url}`
+                let headers = new Headers(); headers.append('Content-Type', 'application/json')
+                let da = { file: data.user.profilePic }
+                let body = JSON.stringify(da)
+                let opt = {
+                    headers, body, method: 'POST', redirect: 'follow'
+                }
 
-                profile.appendChild(profileImg)
+                fetch('http://localhost/api/profile/getUserPic', opt).then((res) => {
+                    res.blob().then((blob) => {
+                        let profile = document.querySelector('.headerProfileImage')
+                        profile.innerHTML = ''
+                        const url = URL.createObjectURL(blob)
+        
+                        let profileImg = document.createElement('img')
+                        profileImg.classList.add('headerProfileImg')
+                        profileImg.src = `${url}`
+        
+                        profile.appendChild(profileImg)
+                    })
+                })
             })
         })
+        
 
-        query('http://localhost/api/profile/getAccountType', { uid: 1 }).then(res => {
-                res.type == 'anfitrion' ? setIsAnfitrion(true) : setIsAnfitrion(false)
-        })
+        /*query('http://localhost/api/profile/getAccountType', { uid: '6681b492f183f738dc1a2010' }).then(res => {
+            res.type == 'anfitrion' ? setIsAnfitrion(true) : setIsAnfitrion(false)
+        })*/
     }, [])
 
     return (

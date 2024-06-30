@@ -4,8 +4,9 @@ import User from '../models/user.model.js'
 import bcrypt from 'bcrypt'
 import generateTokenAndCookie from '../utils/cookieGen.js'
 
-export const validateAuth = (req, res) => {
-    return res.send(checkSign(req, res))
+export const validateAuth = async (req, res) => {
+    const user = await checkSign(req, res)
+    return res.json({ user })
 }
 
 export const login = async (req, res) => {
@@ -58,7 +59,7 @@ export const register = async (req, res) => {
         return res.status(201).send("Created")
     } catch (error) {
         console.log(error)
-        return res.status(500).json({ error: "Error al crear el usuario: " + error.message })
+        return res.status(500).json({ error: "Error al crear el usuario: " + error.message + " || " + error})
 
     }
 }

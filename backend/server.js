@@ -7,6 +7,8 @@ import { createServer } from 'http';
 import cors from 'cors'
 
 import profileRoutes from './routes/profile.routes.js'
+import authRoutes from './routes/auth.routes.js'
+import cookieParser from 'cookie-parser';
 
 configDotenv();
 
@@ -23,9 +25,13 @@ const corsConfig = {
 
 app.use(express.json())
 app.use(cors(corsConfig))
+app.use(cookieParser())
 
+app.use(express.static(path.join(__dirname, '../frontend/dist')))
 app.use('/api/profile', profileRoutes)
+app.use('/api/auth', authRoutes)
 
+app.get('/', (req, res) => {})
 server.listen(PORT, () => {
     connectDB();
     console.log(`http://localhost:${PORT}`)

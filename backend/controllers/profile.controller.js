@@ -8,17 +8,22 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 export const getUserPic = (req, res) => {
-    const imagePath = path.join(__dirname, '../uploads/profiles/roberto.jpg') // Asegúrate de tener la carpeta y el archivo
+    const { file } = req.body
+    
+    const imagePath = path.join(__dirname, `../uploads/profiles/${file}`) // Asegúrate de tener la carpeta y el archivo
 
     // Verifica si el archivo existe
     fs.access(imagePath, fs.constants.F_OK, (err) => {
         if (err) {
+            console.log(err)
             return res.status(404).send('Imagen no encontrada')
         }
         // Establece el tipo de contenido y envía el archivo
         res.type('jpg')
-        res.sendFile(imagePath)
+        return res.status(200).sendFile(imagePath)
     })
+
+    
 }
 
 export const getAccountType = async (req, res) => {
