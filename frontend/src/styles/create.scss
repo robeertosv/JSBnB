@@ -1,0 +1,72 @@
+.createContainer {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    h1 { position: absolute; top: 5vh; bottom: 0; left: 40%; right: 0; margin: auto;}
+
+    .createForm {
+        width: 95vw;
+        height: 75vh;
+
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 25px;
+            background: pink;
+            box-shadow: pink 5px 5px 15px;
+            border-radius: 20px;
+            padding: 15px;
+
+            div {
+                padding: 10px;
+                display: flex;
+                flex-direction: column;
+                margin: 5px;
+
+                label {
+                    font-size: 1.3rem;
+                }
+
+                input,
+                select {
+                    width: 50%;
+                    font-size: 1.25rem;
+                    padding: 5px;
+                }
+
+                select {
+                    border-radius: 10px;
+                }
+
+                input {
+                    background: transparent;
+                    border-bottom: 2px solid #353535;
+                    transition: 0.05s;
+                }
+
+                input:focus {
+                    transition: 0.05s;
+                    border-bottom: 4px solid #353535;
+                }
+
+                input::placeholder {
+                    font-style: italic;
+                }
+
+            }
+
+            button {
+                width: 150%;
+                position: relative;
+                left: 25%;
+                padding: 15px;
+                font-size: 1.5rem;
+                border-radius: 10px;
+                cursor: pointer;
+            }
+        }
+    }
+}

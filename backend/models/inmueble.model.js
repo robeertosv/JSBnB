@@ -9,8 +9,12 @@ const schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    data: {
-        type: Array,
+    description: {
+        type: String,
+        required: true
+    },
+    maxPeople: {
+        type: Number,
         required: true
     },
     esApartamento: {
