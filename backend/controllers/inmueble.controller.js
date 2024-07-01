@@ -4,11 +4,11 @@ import Inmueble from '../models/inmueble.model.js';
 export const createInmueble = async (req, res) => {
     try {
         // Los campos de texto estarán disponibles en req.body
-        const { title, address, description, maxPeople, esApartamento, price, services } = req.body;
+        const { ownerId, title, address, description, maxPeople, esApartamento, price, services } = req.body;
         // El archivo de imagen estará disponible en req.file
         const photo = req.file ? req.file.path : ''; // Guarda la ruta del archivo si existe
 
-        const newInmueble = new Inmueble({ title, address, description, maxPeople, esApartamento, price, services, photo });
+        const newInmueble = new Inmueble({ ownerId, title, address, description, maxPeople, esApartamento, price, services, photo });
 
         await newInmueble.save();
 

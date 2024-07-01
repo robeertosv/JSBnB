@@ -1,7 +1,17 @@
 import '../styles/create.scss'
-
+import { useState, useEffect } from 'react'
 //title, address, description, esApartamento, price, services, photo
 const Create = () => {
+
+    const [currentUser, setCurrentUser] = useState(null)
+
+    useEffect(() => {
+        fetch('http://localhost/api/auth/validateAuth', {method: 'POST', redirect: 'follow'}).then((res) => {
+            res.json().then(data => {
+                setCurrentUser(data.user._id)
+            })
+        })
+    }, [])
 
     const handler = async (e) => {
         e.preventDefault();
@@ -18,6 +28,7 @@ const Create = () => {
     
         // Crear un objeto FormData para enviar los datos del formulario incluyendo el archivo
         const formData = new FormData();
+        formData.append('ownerId', currentUser)
         formData.append('title', title);
         formData.append('address', address);
         formData.append('description', description);

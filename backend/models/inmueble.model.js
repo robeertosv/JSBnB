@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const schema = new mongoose.Schema({
+    ownerId: {
+        type: String,
+        required: true
+    },
     title: {
         type: String,
         required: true
