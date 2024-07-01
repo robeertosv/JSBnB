@@ -8,6 +8,9 @@ import cors from 'cors'
 
 import profileRoutes from './routes/profile.routes.js'
 import authRoutes from './routes/auth.routes.js'
+import inmuebleRoutes from './routes/inmuebles.routes.js'
+import databaseRoutes from './routes/database.routes.js'
+
 import cookieParser from 'cookie-parser';
 
 configDotenv();
@@ -28,8 +31,11 @@ app.use(cors(corsConfig))
 app.use(cookieParser())
 
 app.use(express.static(path.join(__dirname, '../frontend/dist')))
+
 app.use('/api/profile', profileRoutes)
 app.use('/api/auth', authRoutes)
+app.use('/api/inmuebles', inmuebleRoutes)
+app.use('/api/db', databaseRoutes)
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/dist/index.html'))
