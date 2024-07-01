@@ -28,6 +28,11 @@ const schema = new mongoose.Schema({
         type: String,
         required: true,
         default: 'particular'
+    },
+    vip: {
+        type: Boolean,
+        required: true,
+        default: false
     }
 })
 
