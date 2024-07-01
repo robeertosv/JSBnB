@@ -31,7 +31,9 @@ app.use(express.static(path.join(__dirname, '../frontend/dist')))
 app.use('/api/profile', profileRoutes)
 app.use('/api/auth', authRoutes)
 
-app.get('/', (req, res) => {})
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/dist/index.html'))
+})
 server.listen(PORT, () => {
     connectDB();
     console.log(`http://localhost:${PORT}`)
