@@ -1,0 +1,27 @@
+.inmuebleCardContainer{
+    border: 2px solid #353535;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    h1, h2, h3, button {
+        position: relative;
+        left: 25%;
+    }
+    
+    .cardServicesList {
+        display: flex;
+        position: relative;
+        top: 10%;
+        left: 25%;
+    }
+
+    button {
+        font-size: 1.5rem;
+        margin: 10px 0;
+        padding: 10px;
+        background: pink;
+        cursor: pointer;
+        border-radius: 15px;;
+    }
+}

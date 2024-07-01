@@ -38,8 +38,8 @@ export const getInmueblesPreview = async (req, res) => {
             const countPrice = await Inmueble.countDocuments();
 
             res.json({
-                inmuebles,
-                totalPages: Math.ceil(count / limit),
+                inmueblesPrice,
+                totalPages: Math.ceil(countPrice / limit),
                 currentPage: page
             });
             break;
@@ -52,9 +52,9 @@ export const getInmueblesPreview = async (req, res) => {
 
             const countReview = await Inmueble.countDocuments();
 
-            res.json({
-                inmuebles,
-                totalPages: Math.ceil(count / limit),
+            res.status(200).json({
+                inmueblesReview,
+                totalPages: Math.ceil(countReview / limit),
                 currentPage: page
             });
             break
