@@ -17,19 +17,22 @@ export const getUser = async (req, res) => {
 }
 
 export const getInmueblesPreview = async (req, res) => {
-    const { query, filter, page=1, limit=5 } = req.body
-    const regex = new RegExp(query, 'i'); 
+    const { searchQuery, filter, page = 1, limit = 5 } = req.body
+
+    console.log(searchQuery, filter)
+    const regex = new RegExp(searchQuery, 'i');
     const filters = {
         price: 'price',
-        reviews: 'reviews',
+        reviews: 'review',
         city: 'city',
         house: 'house',
         flat: 'flat'
     }
 
-    switch (filter) {
+
+    /*switch (filter) {
         case filters.price:
-            const inmueblesPrice = await Inmueble.find({title: regex})
+            inmueblesResult = await Inmueble.find({title: regex})
                 .sort({ price: 1 }) // Ordenar por precio ascendente (para descendente, usar -1)
                 .limit(limit * 1)
                 .skip((page - 1) * limit)
@@ -44,7 +47,7 @@ export const getInmueblesPreview = async (req, res) => {
             });
             break;
         case filters.reviews:
-            const inmueblesReview = await Inmueble.find({ title: regex })
+            const inmueblesResult = await Inmueble.find({ title: regex })
                 .sort({ review: 1 }) // Ordenar por precio ascendente (para descendente, usar -1)
                 .limit(limit * 1)
                 .skip((page - 1) * limit)
@@ -53,7 +56,7 @@ export const getInmueblesPreview = async (req, res) => {
             const countReview = await Inmueble.countDocuments();
 
             res.status(200).json({
-                inmueblesReview,
+                inmueblesResult,
                 totalPages: Math.ceil(countReview / limit),
                 currentPage: page
             });
@@ -64,5 +67,20 @@ export const getInmueblesPreview = async (req, res) => {
             break;
         case filters.flat:
             break;
-    }
+    }*/
+
+    const inmuebles = await Inmueble.find({ title: regex })
+        .sort({ price: 1 }) // Ordenar por precio ascendente (para descendente, usar -1)
+        .limit(limit * 1)
+        .skip((page - 1) * limit)
+        .exec();
+
+    const countPrice = await Inmueble.countDocuments();
+
+    res.json({
+        inmuebles,
+        totalPages: Math.ceil(countPrice / limit),
+        currentPage: page
+    });
+
 }

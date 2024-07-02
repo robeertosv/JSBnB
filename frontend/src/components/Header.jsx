@@ -1,12 +1,11 @@
 import '../styles/header.scss'
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const Header = ({ isAnfitrion, onSearch, onFilterChange, fetchInmuebles, searchQuery, filter }) => {
 
     const [isVisible, setIsVisible] = useState(false);
-    
-    
-    
+     
     const toggleMenu = () => setIsVisible(!isVisible)
 
     const handleSearchChange = (event) => {
@@ -57,5 +56,14 @@ const Header = ({ isAnfitrion, onSearch, onFilterChange, fetchInmuebles, searchQ
         </div>
     )
 }
+
+Header.propTypes = {
+    isAnfitrion: PropTypes.bool,
+    onSearch: PropTypes.func,
+    onFilterChange: PropTypes.func,
+    fetchInmuebles: PropTypes.func,
+    searchQuery: PropTypes.string,
+    filter: PropTypes.string
+};
 
 export default Header
