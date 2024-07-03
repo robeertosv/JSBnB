@@ -16,15 +16,31 @@ export const getUser = async (req, res) => {
     return res.status(200).json({ result: result })
 }
 
-export const getInmueblesPreview = async (req, res) => {
-    const { searchQuery, filter, page = 1, limit = 5 } = req.body
+export const getInmueble = async (req, res) => {
+    try {
+        const { id } = req.body;
 
-    console.log(searchQuery, filter)
+        const inmueble = await Inmueble.findById(id).exec();
+
+        if (!inmueble) return res.status(404).json({ error: 'No existe ese inmueble' })
+
+        return res.status(200).json(inmueble)
+    }
+    catch(e) {
+        return res.status(500).json({ error: e.message })
+    }
+}
+
+export const getInmueblesPreview = async (req, res) => {
+    let { searchQuery, filter, page = 1, limit = 5 } = req.body
+
+    searchQuery = searchQuery.toLowerCase()
+
     const regex = new RegExp(searchQuery, 'i');
+    console.log(searchQuery, regex)
     const filters = {
         price: 'price',
         reviews: 'review',
-        city: 'city',
         house: 'house',
         flat: 'flat'
     }
@@ -75,6 +91,7 @@ export const getInmueblesPreview = async (req, res) => {
         .skip((page - 1) * limit)
         .exec();
 
+    console.log(inmuebles)
     const countPrice = await Inmueble.countDocuments();
 
     res.json({

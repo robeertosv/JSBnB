@@ -2,22 +2,22 @@ import '../styles/header.scss'
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const Header = ({ isAnfitrion, onSearch, onFilterChange, fetchInmuebles, searchQuery, filter }) => {
+const Header = ({ isAnfitrion, onSearch, onFilterChange }) => {
 
     const [isVisible, setIsVisible] = useState(false);
      
     const toggleMenu = () => setIsVisible(!isVisible)
 
-    const handleSearchChange = (event) => {
+    /*const handleSearchChange = (event) => {
         onSearch(event.target.value);
-    };
+    };*/
 
     const handleFilterChange = (event) => {
         onFilterChange(event.target.value);
     };
 
-    const search = () => {
-        fetchInmuebles(searchQuery, filter);
+    const search = (event) => {
+        onSearch(event.target.value)
     };
 
     return (
@@ -25,7 +25,7 @@ const Header = ({ isAnfitrion, onSearch, onFilterChange, fetchInmuebles, searchQ
             <h1 className="appName">JsBnB</h1>
             <div className="headerSearch">
                 <div className="headerSearchbar">
-                    <input type="text" placeholder='Search Anything' onChange={handleSearchChange} onBlur={search}/>
+                    <input type="text" placeholder='Search Anything' onChange={search}/>
                     
                 </div>
                 <div className="searchFilters">
@@ -67,3 +67,5 @@ Header.propTypes = {
 };
 
 export default Header
+
+//fetchInmuebles, searchQuery, filter

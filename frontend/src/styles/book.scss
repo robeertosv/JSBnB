@@ -1,0 +1,123 @@
+.bookContainer {
+    background: red;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .bookForm {
+        background: yellow;
+        width: 90vw;
+        height: 80vh;
+        padding: 20px;
+        border-radius: 20px;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+
+        div {
+            
+            padding: 10px;
+        }
+
+        h2 {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+            font-weight: 300;
+
+            p {
+                margin-left: 20px;
+                font-size: 1.1rem;
+                font-weight: 200;
+                font-style: italic;
+            }
+        }
+
+        .basicInfo {}
+
+        .moreInfo {
+            h1 {
+                display: flex;
+                align-items: center;
+
+                p {
+                    margin-left: 10px;
+                    font-size: 1.5rem;
+                    font-weight: 200;
+                }
+
+            }
+
+            ul {
+                position: relative;
+                left: 50px;
+                top: 20px;
+
+                li {
+                    font-size: 1.2rem;
+                }
+            }
+        }
+
+        .photo {
+            h1 {
+                display: flex;
+                align-items: center;
+
+                h2 {
+                    margin-left: 20px;
+                    font-size: 1.5em;
+                    font-weight: 200;
+                }
+            }
+        }
+
+        .booking {
+            .fechas {
+                display: flex;
+
+                div {
+                    display: flex;
+                    flex-direction: column;
+
+                    label {
+                        font-size: 1.25rem;
+                    }
+
+                    input {
+                        font-size: 1.5rem;
+                        margin-top: 10px;
+                        padding: 5px;
+                        border-radius: 15px;
+                    }
+                }
+            }
+
+            h1 {
+                position: relative;
+                top: 12%;
+                left: 75%;
+            }
+
+            button {
+                position: relative;
+                top: 25%; left: 50%;
+
+                font-size: 1.75rem;
+                width: 50%;
+                padding: 10px;
+                border-radius: 15px;
+                transition: 0.2s;
+            }
+
+            button:hover {
+                background: #353535;
+                color: #eee;
+                font-size: 1.9rem;
+            }
+        }
+    }
+}
