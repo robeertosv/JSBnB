@@ -1,20 +1,7 @@
-/*import Header from '../components/Header'
-import InmueblesPreview from '../components/InmueblesPreview'
-
-const Home = () => {
-  return (
-    <div className='container'>
-        <Header/>
-        <InmueblesPreview />
-    </div>
-  )
-}
-
-export default Home*/
-// App.jsx
 import { useEffect, useState } from 'react';
 import Header from '../components/Header'
 import InmueblesPreview from '../components/InmueblesPreview';
+import query from '../../utils/query'
 
 const Home = () => {
     //const [searchQuery, setSearchQuery] = useState('');
@@ -26,14 +13,8 @@ const Home = () => {
 
     const searchHandler = async (e) => {
         setIsAnfitrion(false);
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        let data = { searchQuery: e, filter };
-        let body = JSON.stringify(data);
-        let options = { headers, body, method: 'POST', redirect: 'follow' };
 
-        fetch('http://localhost/api/db/getInmueblesPreview', options)
-            .then(response => response.json())
+        query('http://localhost/api/db/getInmueblesPreview', { searchQuery: e, filter })
             .then(inmueble => {
                 setCurrentPage(inmueble.currentPage + 1);
                 setTotalPages(inmueble.totalPages);
@@ -42,21 +23,14 @@ const Home = () => {
     }
 
     useEffect(() => {
-        
-        setIsAnfitrion(false);
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        let data = { searchQuery: '', filter };
-        let body = JSON.stringify(data);
-        let options = { headers, body, method: 'POST', redirect: 'follow' };
 
-        fetch('http://localhost/api/db/getInmueblesPreview', options)
-            .then(response => response.json())
+        setIsAnfitrion(false);
+        query('http://localhost/api/db/getInmueblesPreview', { searchQuery: '', filter })
             .then(inmueble => {
                 setCurrentPage(inmueble.currentPage + 1);
                 setTotalPages(inmueble.totalPages);
                 setInmueblesPreview(inmueble.inmuebles);
-                
+
             });
     }, [])
 

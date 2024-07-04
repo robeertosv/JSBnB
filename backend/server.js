@@ -10,6 +10,7 @@ import profileRoutes from './routes/profile.routes.js'
 import authRoutes from './routes/auth.routes.js'
 import inmuebleRoutes from './routes/inmuebles.routes.js'
 import databaseRoutes from './routes/database.routes.js'
+import reservasRoutes from './routes/reservas.routes.js'
 
 import cookieParser from 'cookie-parser';
 
@@ -36,6 +37,7 @@ app.use('/api/profile', profileRoutes)
 app.use('/api/auth', authRoutes)
 app.use('/api/inmuebles', inmuebleRoutes)
 app.use('/api/db', databaseRoutes)
+app.use('/api/reservas', reservasRoutes)
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/dist/index.html'))

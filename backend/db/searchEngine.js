@@ -1,8 +1,9 @@
 import express from 'express'
 import User from '../models/user.model.js'
 import Inmueble from '../models/inmueble.model.js'
+import path from 'path'
 
-
+const __dirname = path.resolve();
 // Get user info by username
 export const getUser = async (req, res) => {
     const { username, API_KEY } = req.body
@@ -28,6 +29,25 @@ export const getInmueble = async (req, res) => {
     }
     catch(e) {
         return res.status(500).json({ error: e.message })
+    }
+}
+
+export const getPhoto = async (req, res) => {
+    try {
+        const { id } = req.body;
+
+        console.log(id)
+
+        const inmueble = await Inmueble.findById(id).exec();
+
+        if(!inmueble) return res.status(404).json({ error: "No se encontró el inmueble" })
+
+        const photo = inmueble.photo;
+        const imagePath = path.join(__dirname, `../backend/${photo}`) // Asegúrate de tener la carpeta y el archivo
+
+        return res.status(200).sendFile(imagePath)
+    }catch(e) {
+        return res.status(500)
     }
 }
 
