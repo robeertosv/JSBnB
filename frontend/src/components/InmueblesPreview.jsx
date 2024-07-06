@@ -6,7 +6,7 @@ const InmueblesPreview = ({ inmueblesPreview }) => {
   return (
     <div>
       {inmueblesPreview.map((item, idx) => {
-        return (<InmuebleCard key={idx} id={123} title={"Super casa"} description={"Casa coquette"} price={5} services={['WiFi', 'TV']} />)
+        return (<InmuebleCard key={idx} id={'6685b950fad61ae8b2b7aa1a'} title={"Super casa"} description={"Casa coquette"} price={5} services={['WiFi', 'TV']} />)
       })}
     </div>
   )
